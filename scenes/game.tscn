@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=3 uid="uid://cq07uhn265g1t"]
+
+[ext_resource type="PackedScene" uid="uid://b1giyvfn7u6gh" path="res://scenes/player.tscn" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://bbyjgtlvf0f01" path="res://scenes/destructable.tscn" id="2_yqjtg"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yqjtg"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_lnu2h"]
+size = Vector2(500, 20)
+
+[node name="Game" type="Node2D"]
+
+[node name="RigidBody2D" parent="." instance=ExtResource("2_yqjtg")]
+position = Vector2(78, 7)
+
+[node name="RigidBody2D2" parent="." instance=ExtResource("2_yqjtg")]
+position = Vector2(104, 5)
+
+[node name="RigidBody2D3" parent="." instance=ExtResource("2_yqjtg")]
+position = Vector2(87, -24)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_uwrxv")]
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+zoom = Vector2(2, 2)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 29)
+shape = SubResource("WorldBoundaryShape2D_yqjtg")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(0, 38)
+texture = SubResource("PlaceholderTexture2D_lnu2h")
+
+[node name="RigidBody2D4" parent="." instance=ExtResource("2_yqjtg")]
+position = Vector2(135, 4)
+
+[node name="RigidBody2D5" parent="." instance=ExtResource("2_yqjtg")]
+position = Vector2(180, 9)
+
+[node name="RigidBody2D6" parent="." instance=ExtResource("2_yqjtg")]
+position = Vector2(165, -17)
+
+[node name="RigidBody2D7" parent="." instance=ExtResource("2_yqjtg")]
+position = Vector2(158, 8)
+
+[node name="RigidBody2D8" parent="." instance=ExtResource("2_yqjtg")]
+position = Vector2(154, -56)
+
+[node name="RigidBody2D9" parent="." instance=ExtResource("2_yqjtg")]
+position = Vector2(103, -53)
+
+[node name="RigidBody2D10" parent="." instance=ExtResource("2_yqjtg")]
+position = Vector2(114, -24)
+
+[node name="RigidBody2D11" parent="." instance=ExtResource("2_yqjtg")]
+position = Vector2(140, -26)
+
+[node name="RigidBody2D12" parent="." instance=ExtResource("2_yqjtg")]
+position = Vector2(123, -55)
+
+[node name="RigidBody2D13" parent="." instance=ExtResource("2_yqjtg")]
+position = Vector2(113, -80)
+
+[node name="RigidBody2D14" parent="." instance=ExtResource("2_yqjtg")]
+position = Vector2(129, -109)
+
+[node name="RigidBody2D15" parent="." instance=ExtResource("2_yqjtg")]
+position = Vector2(142, -81)
