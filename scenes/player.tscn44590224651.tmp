@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://b1giyvfn7u6gh"]
+[gd_scene load_steps=39 format=3 uid="uid://b1giyvfn7u6gh"]
 
 [ext_resource type="Script" uid="uid://bmorm8uawy3ga" path="res://scripts/player.gd" id="1_fjrip"]
 [ext_resource type="Script" uid="uid://chgeqceymik0" path="res://scripts/states/player/idle.gd" id="2_fjrip"]
@@ -13,7 +13,6 @@
 [ext_resource type="Script" uid="uid://cguc71vbuc05x" path="res://scripts/states/player/fall.gd" id="6_i4ail"]
 [ext_resource type="Script" uid="uid://bcn4ugiraetij" path="res://addons/StateMachine/object_state_machine/node_state_machine.gd" id="6_tuyoq"]
 [ext_resource type="Script" uid="uid://tkmk7c5xx6rb" path="res://scripts/states/player/grab_idle.gd" id="7_a38lo"]
-[ext_resource type="Script" uid="uid://clxr3lem2t0s5" path="res://scripts/states/player/faint.gd" id="7_fulsm"]
 [ext_resource type="Script" uid="uid://cd686tvqjeir4" path="res://scripts/states/player/grab_walk.gd" id="8_4ni07"]
 [ext_resource type="Script" uid="uid://dtflxy1ay1c38" path="res://scripts/states/player/grab_drop.gd" id="9_l71n6"]
 [ext_resource type="Script" uid="uid://cggfe4raf4pns" path="res://scripts/states/player/jump.gd" id="11_ke2ow"]
@@ -762,7 +761,6 @@ tracks/7/keys = {
 [sub_resource type="Animation" id="Animation_y4r1p"]
 resource_name = "Walk"
 length = 0.75
-loop_mode = 1
 step = 0.0333333
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -807,7 +805,6 @@ CLASS_STATE_ATTACK_AIR = ExtResource("3_fulsm")
 CLASS_STATE_ATTACK_GROUND = ExtResource("4_4r5pv")
 CLASS_STATE_ATTACK_DODGE = ExtResource("5_60mlk")
 CLASS_STATE_FALL = ExtResource("6_i4ail")
-CLASS_STATE_FAINT = ExtResource("7_fulsm")
 CLASS_STATE_GRAB_IDLE = ExtResource("7_a38lo")
 CLASS_STATE_GRAB_WALK = ExtResource("8_4ni07")
 CLASS_STATE_GRAB_DROP = ExtResource("9_l71n6")
