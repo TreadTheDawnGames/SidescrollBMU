@@ -69,3 +69,11 @@ position = Vector2(129, -109)
 
 [node name="RigidBody2D15" parent="." instance=ExtResource("2_yqjtg")]
 position = Vector2(142, -81)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -276.0
+offset_top = -108.0
+offset_right = 74.0
+offset_bottom = -33.0
+text = "Make a parry state. parrying blocks all damage, knocks back the attacker, and resets stamina."
+autowrap_mode = 2
