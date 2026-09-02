@@ -1,79 +1,80 @@
-[gd_scene load_steps=5 format=3 uid="uid://cq07uhn265g1t"]
+[gd_scene format=3 uid="uid://cq07uhn265g1t"]
 
 [ext_resource type="PackedScene" uid="uid://b1giyvfn7u6gh" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://bbyjgtlvf0f01" path="res://scenes/destructable.tscn" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://cvwosykg8jn57" path="res://scenes/dummy.tscn" id="3_lnu2h"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yqjtg"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_lnu2h"]
 size = Vector2(500, 20)
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" unique_id=1395151694]
 
-[node name="RigidBody2D" parent="." instance=ExtResource("2_yqjtg")]
+[node name="RigidBody2D" parent="." unique_id=1096315406 instance=ExtResource("2_yqjtg")]
 position = Vector2(78, 7)
 
-[node name="RigidBody2D2" parent="." instance=ExtResource("2_yqjtg")]
+[node name="RigidBody2D2" parent="." unique_id=1111078448 instance=ExtResource("2_yqjtg")]
 position = Vector2(104, 5)
 
-[node name="RigidBody2D3" parent="." instance=ExtResource("2_yqjtg")]
+[node name="RigidBody2D3" parent="." unique_id=803281509 instance=ExtResource("2_yqjtg")]
 position = Vector2(87, -24)
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_uwrxv")]
+[node name="CharacterBody2D" parent="." unique_id=1625380716 instance=ExtResource("1_uwrxv")]
 
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=1842002293]
 zoom = Vector2(2, 2)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1402169772]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1572936793]
 position = Vector2(0, 29)
 shape = SubResource("WorldBoundaryShape2D_yqjtg")
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=336323227]
 position = Vector2(0, 38)
 texture = SubResource("PlaceholderTexture2D_lnu2h")
 
-[node name="RigidBody2D4" parent="." instance=ExtResource("2_yqjtg")]
+[node name="RigidBody2D4" parent="." unique_id=747140023 instance=ExtResource("2_yqjtg")]
 position = Vector2(135, 4)
 
-[node name="RigidBody2D5" parent="." instance=ExtResource("2_yqjtg")]
+[node name="RigidBody2D5" parent="." unique_id=2082170016 instance=ExtResource("2_yqjtg")]
 position = Vector2(180, 9)
 
-[node name="RigidBody2D6" parent="." instance=ExtResource("2_yqjtg")]
+[node name="RigidBody2D6" parent="." unique_id=116281126 instance=ExtResource("2_yqjtg")]
 position = Vector2(165, -17)
 
-[node name="RigidBody2D7" parent="." instance=ExtResource("2_yqjtg")]
+[node name="RigidBody2D7" parent="." unique_id=91413590 instance=ExtResource("2_yqjtg")]
 position = Vector2(158, 8)
 
-[node name="RigidBody2D8" parent="." instance=ExtResource("2_yqjtg")]
+[node name="RigidBody2D8" parent="." unique_id=1914577049 instance=ExtResource("2_yqjtg")]
 position = Vector2(154, -56)
 
-[node name="RigidBody2D9" parent="." instance=ExtResource("2_yqjtg")]
+[node name="RigidBody2D9" parent="." unique_id=49623067 instance=ExtResource("2_yqjtg")]
 position = Vector2(103, -53)
 
-[node name="RigidBody2D10" parent="." instance=ExtResource("2_yqjtg")]
+[node name="RigidBody2D10" parent="." unique_id=1029961353 instance=ExtResource("2_yqjtg")]
 position = Vector2(114, -24)
 
-[node name="RigidBody2D11" parent="." instance=ExtResource("2_yqjtg")]
+[node name="RigidBody2D11" parent="." unique_id=376650575 instance=ExtResource("2_yqjtg")]
 position = Vector2(140, -26)
 
-[node name="RigidBody2D12" parent="." instance=ExtResource("2_yqjtg")]
-position = Vector2(123, -55)
-
-[node name="RigidBody2D13" parent="." instance=ExtResource("2_yqjtg")]
+[node name="RigidBody2D13" parent="." unique_id=1121474920 instance=ExtResource("2_yqjtg")]
 position = Vector2(113, -80)
 
-[node name="RigidBody2D14" parent="." instance=ExtResource("2_yqjtg")]
+[node name="RigidBody2D14" parent="." unique_id=1797168590 instance=ExtResource("2_yqjtg")]
 position = Vector2(129, -109)
 
-[node name="RigidBody2D15" parent="." instance=ExtResource("2_yqjtg")]
+[node name="RigidBody2D15" parent="." unique_id=1220695330 instance=ExtResource("2_yqjtg")]
 position = Vector2(142, -81)
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=979203942]
 offset_left = -276.0
 offset_top = -108.0
 offset_right = 74.0
 offset_bottom = -33.0
 text = "Make a parry state. parrying blocks all damage, knocks back the attacker, and resets stamina."
 autowrap_mode = 2
+
+[node name="Dummy" parent="." unique_id=1601340987 instance=ExtResource("3_lnu2h")]
+position = Vector2(-99, 6)

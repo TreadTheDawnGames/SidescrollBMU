@@ -1,4 +1,4 @@
-extends StateAbstract
+extends PlayerState
 
 # private virtual, expected to be overridden by the inherited state
 func _set_name() -> void:
@@ -12,7 +12,8 @@ func _confirm_transition() -> void:
 # private virtual, expected to be overridden by the inherited state
 # called from the state machine logic
 func _enter() -> void:
-	pass
+	super._enter()
+
 
 # private virtual, expected to be overridden by the inherited state
 # called from the state machine logic

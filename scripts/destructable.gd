@@ -1,4 +1,5 @@
 extends RigidBody2D
+class_name Destructable
 
 @onready var health: HealthComponent = %HealthComponent
 @onready var hitbox: HitBoxComponent2D = %Hitbox
@@ -10,6 +11,8 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _on_hitbox_hit(area : Area2D):
+	if area.owner == owner:
+		return
 	print("hit")
 	apply_central_impulse(((global_position - area.global_position).normalized() + (Vector2.UP)) * 200)
 	pass

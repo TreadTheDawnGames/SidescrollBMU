@@ -1,16 +1,14 @@
-extends StateAbstract
+extends PlayerState
 
 # private virtual, expected to be overridden by the inherited state
 func _set_name() -> void:
 	self._state_name = "Idle"
 
-var player : Player
 
 # private virtual, expected to be overridden by the inherited state
 # called from the state machine logic
 func _enter() -> void:
-	print("entring idle")
-	self.player = self.get_owner()
+	super._enter()
 	player.animator.play("Idle")
 	pass
 
@@ -28,7 +26,10 @@ func _physics_process(_delta : float) -> void:
 		return
 
 	if Input.get_axis("Left", "Right"):
-		self.transition_to(self.player.state_walk)
+		if Input.is_action_pressed("Block"):
+			transition_to(player.state_walk_block)
+		else:
+			self.transition_to(self.player.state_walk)
 		return
 
 	if Input.is_action_just_pressed("Jump") and \
@@ -41,3 +42,8 @@ func _physics_process(_delta : float) -> void:
 	if Input.is_action_just_pressed("Dodge"):
 		transition_to(player.state_dodge)
 		return
+	
+	if Input.is_action_pressed("Block"):
+		transition_to(player.state_block)
+		
+	player.move_and_slide()

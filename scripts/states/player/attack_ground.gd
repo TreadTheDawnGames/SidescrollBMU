@@ -1,6 +1,5 @@
-extends StateAbstract
+extends PlayerState
 
-var player : Player
 
 # private virtual, expected to be overridden by the inherited state
 func _set_name() -> void:
@@ -17,7 +16,7 @@ var exited : bool = true
 # called from the state machine logic
 func _enter() -> void:
 	exited = false
-	player = get_owner()
+	super._enter()
 	player.animator.play("Attack" + str(player.stamina%4))
 	player._handle_stamina(1)
 	player.stamina_reset.start()
@@ -26,7 +25,6 @@ func _enter() -> void:
 	
 	await player.stamina_reset.timeout
 
-	print("changing to idle from attack")
 	if not exited:
 		transition_to(player.state_idle)
 	
@@ -37,6 +35,8 @@ func _enter() -> void:
 func _exit() -> void:
 	player.stamina_reset.stop()
 	exited = true
+	player.hurtbox_shape.disabled = true
+
 	pass
 
 # private virtual, intended to be implemented in one of these methods
@@ -59,7 +59,7 @@ func _process(delta : float) -> void:
 func _physics_process(delta : float) -> void:
 	
 	if not player.is_on_floor():
-		player.velocity += player.get_gravity()*delta
+		player.handle_gravity(delta)
 	
 	if Input.is_action_just_pressed("Dodge"):
 		transition_to(player.state_dodge)
@@ -68,22 +68,15 @@ func _physics_process(delta : float) -> void:
 		print("attacking")
 		exited = true
 		transition_to(player.state_attack_ground)
-		
-	
-	var direction = Input.get_axis("Left", "Right")
-	if direction:
-		#self.player.velocity.x = direction * self.player.SPEED
-		player.sprite.scale.x = sign(direction)
-	#else:
-		#print("changing to idle from walk")
-		##transition_to(player.state_idle)
-	self.player.velocity.x = move_toward(self.player.velocity.x, 0, self.player.SPEED)
 
+	player.handle_facing(true)
+	
 	if Input.is_action_just_pressed("Jump"):
 		transition_to(player.state_jump)
-
-	self.player.move_and_slide()
-
+		
+	player.velocity.x = lerp(player.velocity.x, 0.0, 0.5)
+	#player.handle_movement(0.125, false)
+	player.move_and_slide()
 	
 	pass
 

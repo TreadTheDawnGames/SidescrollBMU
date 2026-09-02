@@ -1,15 +1,14 @@
-extends StateAbstract
+extends PlayerState
 
 # private virtual, expected to be overridden by the inherited state
 func _set_name() -> void:
 	self._state_name = "Faint"
 
-var player : Player
 
 # private virtual, expected to be overridden by the inherited state
 # called from the state machine logic
 func _enter() -> void:
-	self.player = self.get_owner()
+	super._enter()
 	player.animator.play("Faint")
 	player.stamina_reset.stop()
 	player.faint_time.start()
@@ -24,14 +23,13 @@ func _enter() -> void:
 	if(player.max_stamina<=0):
 		print(player.max_stamina)
 		return
-	print("changing to idle from faint")
 	transition_to(player.state_idle)
 	#fainted = false
 	pass
 
 func _physics_process(delta : float) -> void:
 	if not player.is_on_floor():
-		player.velocity += player.get_gravity() * delta
+		player.handle_gravity(delta)
 	player.velocity.x = move_toward(player.velocity.x, 0, player.SPEED)
 	player.move_and_slide()
 	pass

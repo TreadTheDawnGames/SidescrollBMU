@@ -1,6 +1,4 @@
-extends StateAbstract
-
-var player : Player
+extends PlayerState
 
 # private virtual, expected to be overridden by the inherited state
 func _set_name() -> void:
@@ -17,14 +15,13 @@ var exited : bool = true
 # called from the state machine logic
 func _enter() -> void:
 	exited = false
-	player = get_owner()
+	super._enter()
 	player.animator.play("AirAttack" + str(player.stamina%4))
 	player._handle_stamina(1)
 	player.stamina_reset.start()
 	
 	await player.stamina_reset.timeout
 
-	print("changing to idle from attack")
 	if not exited:
 		transition_to(player.state_fall)
 	
@@ -34,6 +31,7 @@ func _enter() -> void:
 # called from the state machine logic
 func _exit() -> void:
 	player.stamina_reset.stop()
+	player.hurtbox_shape.disabled = true
 	pass
 
 # private virtual, intended to implement the logic of the method
@@ -42,25 +40,20 @@ func _exit() -> void:
 func _physics_process(delta : float) -> void:
 	
 	if not player.is_on_floor():
-		player.velocity += player.get_gravity()*delta
+		player.handle_gravity(delta)
 	
 	if(Input.is_action_just_pressed("Attack")):
 		print("attacking")
 		exited = true
 		transition_to(player.state_attack_air)
 	
-	var direction = Input.get_axis("Left", "Right")
-	if direction:
-		self.player.velocity.x = direction * self.player.SPEED
-		player.sprite.scale.x = sign(direction)
-	else:
-		self.player.velocity.x = move_toward(self.player.velocity.x, 0, self.player.SPEED)
+	self.player.handle_movement(1.0, false)
 
 	if player.is_on_floor():
 		transition_to(player.state_idle)
 		return
 
-	self.player.move_and_slide()
+	#self.player.move_and_slide()
 
 	
 	pass

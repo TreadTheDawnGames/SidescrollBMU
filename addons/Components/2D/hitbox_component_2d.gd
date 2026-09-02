@@ -24,7 +24,7 @@ func _ready() -> void:
 ## Applies the [member HurtBoxComponent2D.damage] to the health component
 ## and emits [signal HitBoxComponent2D.Hit].
 func hurtbox_entered(area : Area2D) -> void:
-	if (area is HurtBoxComponent2D):
+	if (area is HurtBoxComponent2D and area.owner != owner):
 		Hit.emit(area)
 		
 		if (health_component):

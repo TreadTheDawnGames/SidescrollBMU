@@ -1,6 +1,4 @@
-extends StateAbstract
-
-var player : Player
+extends PlayerState
 
 # private virtual, expected to be overridden by the inherited state
 func _set_name() -> void:
@@ -14,11 +12,11 @@ func _confirm_transition() -> void:
 # private virtual, expected to be overridden by the inherited state
 # called from the state machine logic
 func _enter() -> void:
-	player = get_owner()
+	super._enter()
 	player.animator.play("Jump")
 	player.velocity.y += player.JUMP_VELOCITY
 	transition_to(player.state_air)
-	player._handle_stamina(1)
+	#player._handle_stamina(1)
 	pass
 
 # private virtual, expected to be overridden by the inherited state
