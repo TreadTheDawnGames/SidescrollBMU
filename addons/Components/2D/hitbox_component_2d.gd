@@ -7,6 +7,8 @@ class_name HitBoxComponent2D
 ## Health component used for taking damage.
 @export var health_component : HealthComponent
 
+var do_automatic_damage : bool = true
+
 ## Signal that is emitted when the HitBoxComponent2D is hit by a [HurtBoxComponent2D].
 signal Hit(Area2D)
 
@@ -27,5 +29,5 @@ func hurtbox_entered(area : Area2D) -> void:
 	if (area is HurtBoxComponent2D and area.owner != owner):
 		Hit.emit(area)
 		
-		if (health_component):
+		if (health_component and do_automatic_damage):
 			health_component.damage(area.damage)

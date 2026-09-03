@@ -4,8 +4,6 @@ extends PlayerState
 func _set_name() -> void:
 	self._state_name = "Dodge"
 
-var vel_buffer : float
-
 func _enter():
 	super._enter()
 	player.set_collision_mask_value(2, false)
@@ -13,15 +11,20 @@ func _enter():
 	player._handle_stamina(1)
 	
 	print("before", player.velocity.x)
-	vel_buffer = player.velocity.x + player.DASH_SPEED * player.sprite.scale.x
+	vel_buffer.x = player.velocity.x + player.DASH_SPEED * player.sprite.scale.x
 	print("after", player.velocity.x)
 	
 	await player.animator.animation_finished
-	#if(Input.get_axis("Left", "Right")):
-		#transition_to(player.state_walk)
-	#else:
-	player.velocity.x = 0
-	transition_to(player.state_idle)
+	if(Input.get_axis("Left", "Right")):
+		if Input.is_action_pressed("Block"):
+			transition_to(player.state_walk_block)
+		else:
+			transition_to(player.state_walk)
+	elif Input.is_action_pressed("Block"):
+		transition_to(player.state_block)
+	else:
+		player.velocity.x = 0
+		transition_to(player.state_idle)
 	
 	pass
 
@@ -36,9 +39,8 @@ func _physics_process(delta : float) -> void:
 	
 	if(Input.is_action_just_pressed("Attack")):
 		transition_to(player.state_attack_ground)
-	print(player.velocity.x)
-	vel_buffer = vel_buffer * 0.75
-	player.velocity.x = vel_buffer
+	vel_buffer.x = vel_buffer.x * 0.75
+	player.velocity.x = vel_buffer.x
 	
 	player.move_and_slide()
 	pass

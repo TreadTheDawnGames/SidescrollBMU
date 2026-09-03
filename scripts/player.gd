@@ -15,6 +15,7 @@ class_name Player
 @onready var hurtbox_shape: CollisionShape2D = %PunchBoxShape
 @onready var faint_time: Timer = %FaintTime
 @onready var hitbox: HitBoxComponent2D = %HitBoxComponent2D
+@onready var parry_frames_debug: Label = %ParryFramesDebug
 
 
 @export var CLASS_STATE_AIR  : Script
@@ -104,7 +105,7 @@ func _ready():
 func _physics_process(delta : float) -> void:
 	state_machine.physics_process(delta)
 	var cur_state : StateAbstract = state_machine._current_state
-	#print("state: " + cur_state.get_name())
+	print("state: " + cur_state.get_name())
 
 func free() -> void:
 	state_air.free()
@@ -130,7 +131,8 @@ var stamina : int = 0 :
 		pass
 
 func handle_gravity(delta : float):
-	velocity += get_gravity() * delta
+	if not is_on_floor():
+		velocity += get_gravity() * delta
 
 
 func handle_movement(multiplier : float = 1.0, transition_to_idle : bool = true, flip_sprite : bool = true):

@@ -35,8 +35,8 @@ func _enter() -> void:
 func _exit() -> void:
 	player.stamina_reset.stop()
 	exited = true
-	player.hurtbox_shape.disabled = true
-
+	player.hurtbox_shape.set_deferred("disabled", true)
+	
 	pass
 
 # private virtual, intended to be implemented in one of these methods
@@ -58,8 +58,7 @@ func _process(delta : float) -> void:
 # _physics_process(delta : float)
 func _physics_process(delta : float) -> void:
 	
-	if not player.is_on_floor():
-		player.handle_gravity(delta)
+	player.handle_gravity(delta)
 	
 	if Input.is_action_just_pressed("Dodge"):
 		transition_to(player.state_dodge)

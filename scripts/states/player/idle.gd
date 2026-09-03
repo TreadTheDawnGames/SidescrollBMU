@@ -46,4 +46,5 @@ func _physics_process(_delta : float) -> void:
 	if Input.is_action_pressed("Block"):
 		transition_to(player.state_block)
 		
-	player.move_and_slide()
+	#player.move_and_slide()
+	#vel_buffer = player.velocity

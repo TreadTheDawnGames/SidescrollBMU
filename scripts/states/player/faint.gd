@@ -28,8 +28,7 @@ func _enter() -> void:
 	pass
 
 func _physics_process(delta : float) -> void:
-	if not player.is_on_floor():
-		player.handle_gravity(delta)
+	player.handle_gravity(delta)
 	player.velocity.x = move_toward(player.velocity.x, 0, player.SPEED)
 	player.move_and_slide()
 	pass

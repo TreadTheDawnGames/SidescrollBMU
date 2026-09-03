@@ -39,8 +39,8 @@ func _exit() -> void:
 # _physics_process(delta : float)
 func _physics_process(delta : float) -> void:
 	
-	if not player.is_on_floor():
-		player.handle_gravity(delta)
+	
+	player.handle_gravity(delta)
 	
 	if(Input.is_action_just_pressed("Attack")):
 		print("attacking")

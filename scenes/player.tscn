@@ -871,6 +871,26 @@ CLASS_STATE_BLOCK = ExtResource("15_4ni07")
 CLASS_STATE_PARRY = ExtResource("16_l71n6")
 CLASS_STATE_DAMAGED = ExtResource("17_4ni07")
 
+[node name="HBoxContainer" type="VBoxContainer" parent="." unique_id=2023636672]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -56.0
+offset_top = -65.0
+offset_right = 56.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 2
+
+[node name="ParryFramesDebug" type="Label" parent="HBoxContainer" unique_id=1596576655]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Parry Frames:   "
+
 [node name="StateMachine" type="Node" parent="." unique_id=665437391]
 unique_name_in_owner = true
 script = ExtResource("6_tuyoq")
