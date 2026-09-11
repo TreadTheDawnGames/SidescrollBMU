@@ -15,7 +15,8 @@ func _physics_process(delta : float) -> void:
 	
 	if not Input.get_axis("Left", "Right"):
 		transition_to(player.state_block)
-
+		player.state_walk_block.set_parry_frames(current_parry_frames)
+		
 	if Input.is_action_just_pressed("Attack"):
 		transition_to(player.state_attack_ground)
 

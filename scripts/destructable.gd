@@ -13,10 +13,14 @@ func _ready() -> void:
 func _on_hitbox_hit(area : Area2D):
 	if area.owner == owner:
 		return
-	print("hit")
-	apply_central_impulse(((global_position - area.global_position).normalized() + (Vector2.UP)) * 200)
+	#print("hit")
+	take_knockback((global_position - area.global_position).normalized() + (Vector2.UP), 200.0)
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
+
+func take_knockback(direction : Vector2, knock_power : float):
+	apply_central_impulse(direction * knock_power)
+	

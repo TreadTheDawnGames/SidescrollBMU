@@ -7,11 +7,14 @@ var current_parry_frames : float = 12
 func _enter():
 	super._enter()
 	player.animator.play("Block")
-	current_parry_frames = total_parry_frames
+	#set_parry_frames(total_parry_frames)
 
-#func _exit():
-	#current_parry_frames = total_parry_frames
-	#player.parry_frames_debug.text = "Parry: " + str(current_parry_frames)
+#func _confirm_transition() -> void:
+	#print("current state: ", player.current_state_name())
+
+func _exit():
+	current_parry_frames = total_parry_frames
+	player.parry_frames_debug.text = "Parry: " + str(current_parry_frames)
 
 
 func _set_name() -> void:
@@ -24,6 +27,7 @@ func _physics_process(delta : float) -> void:
 	
 	if Input.get_axis("Left", "Right"):
 		transition_to(player.state_walk_block)
+		player.state_walk_block.set_parry_frames(current_parry_frames)
 	
 	if Input.is_action_just_pressed("Attack"):
 		transition_to(player.state_attack_ground)
@@ -33,9 +37,9 @@ func _physics_process(delta : float) -> void:
 	
 	vel_buffer.x = vel_buffer.x * 0.75
 	player.velocity = vel_buffer
-	print("before: ", player.velocity)
+	#print("before: ", player.velocity)
 	player.handle_gravity(delta)
-	print("after: ", player.velocity)
+	#print("after: ", player.velocity)
 	player.move_and_slide()
 	vel_buffer = player.velocity
 	
@@ -49,3 +53,6 @@ func handle_damaged(area : Area2D):
 	else:
 		vel_buffer = (player.global_position - area.global_position).normalized() * 200
 	pass
+
+func set_parry_frames(frames : int):
+	current_parry_frames = frames

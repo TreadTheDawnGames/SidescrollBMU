@@ -16,6 +16,7 @@ class_name Player
 @onready var faint_time: Timer = %FaintTime
 @onready var hitbox: HitBoxComponent2D = %HitBoxComponent2D
 @onready var parry_frames_debug: Label = %ParryFramesDebug
+@onready var near_area: Area2D = %NearArea
 
 
 @export var CLASS_STATE_AIR  : Script
@@ -105,7 +106,7 @@ func _ready():
 func _physics_process(delta : float) -> void:
 	state_machine.physics_process(delta)
 	var cur_state : StateAbstract = state_machine._current_state
-	print("state: " + cur_state.get_name())
+	#print("state: " + cur_state.get_name())
 
 func free() -> void:
 	state_air.free()
@@ -171,5 +172,17 @@ func handle_damage(area : Area2D):
 	#velocity += (((global_position - area.global_position).normalized() * 200 + (Vector2.UP * 20)) )
 	state_machine._current_state.handle_damaged(area)
 	#transition_to(player.state_damaged)
-	print("hit")
+	#print("hit")
 	pass
+
+func get_near_bodies() -> Array[Node2D]:
+	return near_area.get_overlapping_bodies()
+	
+func get_near_areas() -> Array[Area2D]:
+	return near_area.get_overlapping_areas()
+	
+func current_state() -> StateAbstract:
+	return state_machine._current_state
+
+func current_state_name() -> String:
+	return state_machine._current_state.get_name()
