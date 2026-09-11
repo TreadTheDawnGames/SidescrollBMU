@@ -974,6 +974,7 @@ one_shot = true
 
 [node name="NearArea" type="Area2D" parent="." unique_id=567127491]
 unique_name_in_owner = true
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NearArea" unique_id=2077027542]
 shape = SubResource("CircleShape2D_6ko1l")

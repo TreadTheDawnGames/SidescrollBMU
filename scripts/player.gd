@@ -152,9 +152,13 @@ func handle_movement(multiplier : float = 1.0, transition_to_idle : bool = true,
 func handle_facing(flip_sprite : bool) -> float:
 	var direction = Input.get_axis("Left", "Right")
 	if abs(direction) > 0 and flip_sprite:
-		sprite.scale.x = sign(direction)
+		set_facing(direction)
 
 	return direction
+
+func set_facing(direction : float):
+	sprite.scale.x = sign(direction)
+
 
 func _handle_stamina(amount : int):
 	stamina += amount
