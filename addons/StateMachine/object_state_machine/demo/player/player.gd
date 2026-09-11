@@ -40,7 +40,7 @@ var state_air  : StateAbstract
 var state_jump : StateAbstract
 var state_fall : StateAbstract
 
-var state_machine : Object
+var state_machine : StateMachine
 
 # señal, recibe cuando se activa un cambio de estado
 func _in_transition(

@@ -1,33 +1,23 @@
 extends PlayerState
 class_name Block_PlayerState
 
-var total_parry_frames : float = 12
-var current_parry_frames : float = 12
-
 func _enter():
 	super._enter()
+	if not player.state_machine.get_prev_state().get_name() == "Walk-Block":
+		set_parry_frames(player.PARRY_FRAMES)
+
 	player.animator.play("Block")
-	#set_parry_frames(total_parry_frames)
-
-#func _confirm_transition() -> void:
-	#print("current state: ", player.current_state_name())
-
-func _exit():
-	current_parry_frames = total_parry_frames
-	player.parry_frames_debug.text = "Parry: " + str(current_parry_frames)
-
 
 func _set_name() -> void:
 	_state_name = "Block"
 
 func _physics_process(delta : float) -> void:
-	player.parry_frames_debug.text = "Parry: " + str(current_parry_frames)
+	player.parry_frames_debug.text = "Parry: " + str(player.curr_parry_frames)
 	if Input.is_action_just_released("Block"):
 		transition_to(player.state_idle)
 	
 	if Input.get_axis("Left", "Right"):
 		transition_to(player.state_walk_block)
-		player.state_walk_block.set_parry_frames(current_parry_frames)
 	
 	if Input.is_action_just_pressed("Attack"):
 		transition_to(player.state_attack_ground)
@@ -43,11 +33,11 @@ func _physics_process(delta : float) -> void:
 	player.move_and_slide()
 	vel_buffer = player.velocity
 	
-	if current_parry_frames > 0:
-		current_parry_frames -= 1
+	if player.curr_parry_frames > 0:
+		player.curr_parry_frames -= 1
 
 func handle_damaged(area : Area2D):
-	if current_parry_frames > 0:
+	if player.curr_parry_frames > 0:
 		vel_buffer = Vector2.ZERO
 		transition_to(player.state_parry)
 	else:
@@ -55,4 +45,4 @@ func handle_damaged(area : Area2D):
 	pass
 
 func set_parry_frames(frames : int):
-	current_parry_frames = frames
+	player.curr_parry_frames = frames

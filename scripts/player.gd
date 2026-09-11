@@ -6,6 +6,9 @@ class_name Player
 @export var SPEED = 300.0
 @export var JUMP_VELOCITY = -400.0
 @export var DASH_SPEED = 500
+@export var PARRY_FRAMES = 12
+@export var curr_parry_frames = 0
+
 #@onready var punch_box_shape: CollisionShape2D = $Punch/PunchBoxd
 @onready var health: HealthComponent = %HealthComponent
 @onready var animator: AnimationPlayer = %Animator
@@ -54,7 +57,7 @@ var state_block : StateAbstract
 var state_parry : StateAbstract
 var state_damaged : StateAbstract
 
-var state_machine 
+var state_machine : StateMachine
 
 func _ready():
 	state_machine = %StateMachine.get_stage_machine()

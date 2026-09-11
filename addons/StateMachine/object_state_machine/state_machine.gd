@@ -1,4 +1,5 @@
 extends Object
+class_name StateMachine
 
 # señal que indica cuando se realiza un cambio de estado
 # signal transitioned(current : StateAbstract, next : StateAbstract)
